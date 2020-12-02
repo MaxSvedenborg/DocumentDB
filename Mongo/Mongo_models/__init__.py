@@ -1,4 +1,4 @@
-from mongo.base_document import Document, db
+from Mongo.Base_documents import Document, db
 
 
 class Product(Document):

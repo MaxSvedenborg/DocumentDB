@@ -43,7 +43,7 @@ class Customer(Base):
     CustomerTypeId = Column(ForeignKey('customertype.CustomerTypeId'), nullable=False, index=True)
 
     customertype = relationship('Customertype')
-
+    cars = relationship('Car')
 
 class Manufactor(Base):
     __tablename__ = 'manufactor'
