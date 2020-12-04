@@ -18,3 +18,6 @@ class Customer(Document):
 
 class Order(Document):
     collection = db.orders
+
+class Manufactorer(Document):
+    collection = db.manufactorers

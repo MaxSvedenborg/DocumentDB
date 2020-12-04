@@ -36,9 +36,31 @@ def fix_personal_data():
         mongo_personaldata.save()
         print()
 
+def fix_manufactorer():
+    manufactorers = session.query(Manufactor).all()
+    for manufactorer in manufactorers:
+        as_dict = manufactorer.__dict__
+        as_dict['PersonalData'] = [personal.__dict__ for personal in manufactorer.personaldata]
+
+
+        del as_dict['personaldata']
+
+        for personaldata_dict in as_dict['ManufactorerPersonaldata']:
+            del personaldata_dict['_sa_instance_state']
+            print()
+        del as_dict['_sa_instance_state']
+
+        mongo_manufactorer = mm.Manufactorer(as_dict)
+        mongo_manufactorer.save()
+
+
+        print()
+
+
 def main():
     fix_customers()
     fix_personal_data()
+    fix_manufactorer()
 
 if __name__ == '__main__':
     main()

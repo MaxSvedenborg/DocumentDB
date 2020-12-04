@@ -6,7 +6,7 @@ class Customer(Document):
 
 
 class Personaldata(Document):
-    collection = db.personalata
+    collection = db.personaldata
 
 
 class Order(Document):
@@ -19,3 +19,6 @@ class Store(Document):
 
 class Supplier(Document):
     collection = db.suppliers
+
+class Manufactorer(Document):
+    collection = db.manufactorers
