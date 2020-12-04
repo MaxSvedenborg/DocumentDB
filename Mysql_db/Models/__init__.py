@@ -13,7 +13,7 @@ class Customertype(Base):
     CustomerType = Column(String(100), nullable=False)
 
 
-class Personaldatum(Base):
+class Personaldata(Base):
     __tablename__ = 'personaldata'
 
     PersonalDataId = Column(Integer, primary_key=True)
@@ -54,7 +54,7 @@ class Manufactor(Base):
     ManufactoerPhoneHQ = Column(String(100), nullable=False)
     PersonalDataId = Column(ForeignKey('personaldata.PersonalDataId'), nullable=False, index=True)
 
-    personaldatum = relationship('Personaldatum')
+    personaldata = relationship('Personaldata')
 
 
 class Storeemployee(Base):
@@ -64,7 +64,7 @@ class Storeemployee(Base):
     StoreId = Column(ForeignKey('store.StoreId'), nullable=False, index=True)
     PersonalDataId = Column(ForeignKey('personaldata.PersonalDataId'), nullable=False, index=True)
 
-    personaldatum = relationship('Personaldatum')
+    personaldata = relationship('Personaldata')
     store = relationship('Store')
 
 
@@ -78,7 +78,7 @@ class Supplier(Base):
     SupplierEmail = Column(String(100), nullable=False)
     PersonalDataId = Column(ForeignKey('personaldata.PersonalDataId'), nullable=False, index=True)
 
-    personaldatum = relationship('Personaldatum')
+    personaldata = relationship('Personaldata')
 
 
 class Car(Base):

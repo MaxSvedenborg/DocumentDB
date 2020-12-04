@@ -1,8 +1,8 @@
 from Mongo.Base_documents import Document, db
 
 
-class Product(Document):
-    collection = db.products
+class Personaldata(Document):
+    collection = db.personaldata
 
 
 class Office(Document):
