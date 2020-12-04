@@ -16,7 +16,7 @@ def fix_customers():
         del as_dict['CustomerType']['_sa_instance_state']
         for car_dict in as_dict['CustomerCars']:
             del car_dict['_sa_instance_state']
-            print()
+
         del as_dict['_sa_instance_state']
 
         mongo_customer = mm.Customer(as_dict)
@@ -36,9 +36,27 @@ def fix_personal_data():
         mongo_personaldata.save()
         print()
 
+def fix_orders():
+    orders = session.query(Order).all()
+    for order in orders:
+        as_dict = order.__dict__
+        as_dict['Customer'] = order.customer.__dict__
+        as_dict['OrderDate'] = str(order.OrderDate)
+        as_dict['OrderTime'] = str(order.OrderTime)
+
+        del as_dict['_sa_instance_state']
+        del as_dict ['Customer']['_sa_instance_state']
+        del as_dict['customer']
+
+        mongo_order = mm.Order(as_dict)
+        mongo_order.save()
+
+        print()
+
 def main():
     fix_customers()
     fix_personal_data()
+    fix_orders()
 
 if __name__ == '__main__':
     main()
