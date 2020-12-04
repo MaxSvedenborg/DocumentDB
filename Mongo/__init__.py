@@ -18,3 +18,9 @@ class Store(Document):
 
 class Supplier(Document):
     collection = db.suppliers
+
+
+class Inventory(Document):
+    collection = db.inventory
+
+

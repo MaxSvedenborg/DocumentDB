@@ -1,7 +1,7 @@
 import datetime
 
 from Mysql_db.DB import session
-from Mysql_db.Models import Customertype, Personaldatum, Store, Customer, Manufactor, Storeemployee, Supplier, Car, Order, Sparepart, Inventory, Orderssparepart
+from Mysql_db.Models import Customertype, Personaldata, Store, Customer, Manufactor, Storeemployee, Supplier, Car, Order, Sparepart, Inventory, Orderssparepart
 import Mongo.Mongo_models as mm
 
 def fix_customers():
@@ -25,6 +25,34 @@ def fix_customers():
 
         print()
 
+def fix_inventory():
+    inventories = session.query(Inventory).all()
+    for inventory in inventories:
+        as_dict = inventory.__dict__
+
+        mongo_inventory = mm.Inventory(as_dict)
+        mongo_inventory.save()
+
+        print()
+
+
+def fix_stores():
+    stores = session.query(Store).all()
+    for store in stores:
+        as_dict = store.__dict__
+        as_dict['Storeemployees'] = [storeemployee.__dict__ for storeemployee in stores.storeemplyee]
+
+        del as_dict['storeemployee']
+        for storeemployee_dict in as_dict['StoreEmployee']:
+            del storeemployee_dict['_sa_instance_state']
+            print()
+        del as_dict['_sa_instance_state']
+
+        mongo_store = mm.Store(as_dict)
+        mongo_store.save()
+
+
+        print()
 # def fix_offises():
 #     offices = session.query(Office).all()
 #     for office in offices:
@@ -115,7 +143,7 @@ def fix_customers():
 
 
 def fix_personal_data():
-    personal_data = session.query(Personaldatum).all()
+    personal_data = session.query(Personaldata).all()
     for personal in personal_data:
         as_dict = personal.__dict__
         print()

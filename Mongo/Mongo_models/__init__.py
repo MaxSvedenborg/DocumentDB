@@ -18,3 +18,15 @@ class Customer(Document):
 
 class Order(Document):
     collection = db.orders
+
+
+class Inventory(Document):
+    collection = db.inventory
+
+
+class Store(Document):
+    collection = db.stores
+
+
+class Personaldata(Document):
+    collection = db.personalata
