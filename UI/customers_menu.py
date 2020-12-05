@@ -1,16 +1,7 @@
 from BL.customers_controller import get_all_customers, get_customer_by_id, get_customer_by_name, store_new_phone, \
     store_new_customertype, store_new_email, store_new_name, delete_customer, store_new_customer
 
-#As a user, I want to be able to view all customers in the system.
-# As a user, I want to be able to add/create customers list into the system.
-    #As a user, I want to be able to choose which customers type it is when adding into the system.
-#As a user, as I am done with adding customers into the system, I want to be able to choose whether to exit the program or to make an order for this particular customer.
-#As a user, I want to be able to update information of the customers in the system.
-#As a user, I want to be able to delete a particular customers from the database system i needed.
-
-#As a user, I want to be able to see how many cars did this particular customer own, by searching for name or ID (not sure - wait with it).
-#As a user, I want to be able to see how many orders history of this customers (Not sure -wait with it).
-from Data.Models.customers import Customer
+from Mongo.Mongo_models import Customer
 
 
 def customers_menu():
@@ -77,7 +68,6 @@ def customers_menu():
                         store_new_email(customer, new_value)
                         print("Sucessfully updated customer email")
                     elif line == "5":
-
                         print('Please select the following customer type:')
                         print('1. Company')
                         print('2. Private')
@@ -93,7 +83,7 @@ def customers_menu():
             print('2. Private')
             customer_type = input("Enter new Customer Type: ")
 
-            customer = Customer()
+            customer = Customer({})
             customer.CustomerTypeId = customer_type
             customer.CustomerName = input("Enter Customer Name: ")
             customer.CustomerAddress = input("Enter Customer Address: ")

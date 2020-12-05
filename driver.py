@@ -1,5 +1,3 @@
-import datetime
-
 from Mysql_db.DB import session
 from Mysql_db.Models import Customertype, Personaldata, Store, Customer, Manufactor, Storeemployee, Supplier, Car, Order, Sparepart, Inventory, Orderssparepart
 import Mongo.Mongo_models as mm
@@ -12,6 +10,7 @@ def fix_customers():
         as_dict['CustomerCars'] = [car.__dict__ for car in customer.cars]
 
         del as_dict['customertype']
+        del as_dict['CustomerTypeId']
         del as_dict['cars']
         del as_dict['CustomerType']['_sa_instance_state']
         for car_dict in as_dict['CustomerCars']:
