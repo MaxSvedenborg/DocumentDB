@@ -1,19 +1,35 @@
-from Mongo.Base_documents import Document, db
+from Mongo.Base_documents import Document, db, NestedDocument
 
 
 class Personaldata(Document):
     collection = db.personaldata
 
 
-# class Office(Document):
-#     collection = db.offices
-#
-#
-# class Employee(Document):
-#     collection = db.employees
-
 class Customer(Document):
     collection = db.customers
+
+
+    def __init__(self, data):
+        super().__init__(data)
+
+        if "CustomerCars" in self.__dict__:
+            self.CustomerCars = [NestedDocument(car) for car in self.CustomerCars]
+
+        if "CustomerType" in self.__dict__:
+            self.CustomerType = NestedDocument(self.CustomerType)
+
+    def save(self):
+        if "CustomerCars" in self.__dict__:
+            self.CustomerCars = [car.__dict__ for car in self.CustomerCars]
+
+        if "CustomerType" in self.__dict__:
+            self.CustomerType = self.CustomerType.__dict__
+
+        super().save()
+
+
+    def __str__(self):
+        return f"{self.CustomerName}"
 
 
 class Order(Document):
