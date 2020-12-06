@@ -34,3 +34,26 @@ class Customer(Document):
 
 class Order(Document):
     collection = db.orders
+
+    def __init__(self, data):
+        super().__init__(data)
+
+        if "Customer" in self.__dict__:
+            self.Customer = NestedDocument(self.Customer)
+
+        if "Orderssparepart" in self.__dict__:
+            self.Orderssparepart = [NestedDocument(orderssparepart) for orderssparepart in self.Orderssparepart]
+
+    def save(self):
+        if "Customer" in self.__dict__:
+            self.Customer = self.Customer.__dict__
+
+        if "Orderssparepart" in self.__dict__:
+            self.Orderssparepart = [orderssparepart.__dict__ for orderssparepart in self.Orderssparepart]
+
+        super().save()
+
+
+
+    def __str__(self):
+        return f'{self.OrderDate} {self.OrderTime} ({self.Customer.CustomerName})'

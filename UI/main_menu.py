@@ -1,5 +1,5 @@
 from UI.customers_menu import customers_menu
-
+from UI.orders_menu import orders_menu
 
 
 def main_menu():
@@ -7,10 +7,10 @@ def main_menu():
         print("=====================")
         print("Main Menu")
         print("=====================")
-        print("1. Customers") #tested
+        print("1. Customers") #tested - todo: create car for customer in menu
         print("2. Customer Types")
         print("3. Cars")
-        print("4. Orders")
+        print("4. Orders")  #tested - todo: create orderspareparts in menu
         print("5. Personal Data")
         print("6. Suppliers")
         print("7. Stores")
@@ -27,8 +27,8 @@ def main_menu():
         #     customers_type_menu()
         # elif selection == "3":
         #     cars_menu()
-        # elif selection == "4":
-        #     orders_menu()
+        elif selection == "4":
+            orders_menu()
         # elif selection == "5":
         #     personaldata_menu()
         # elif selection == "6":

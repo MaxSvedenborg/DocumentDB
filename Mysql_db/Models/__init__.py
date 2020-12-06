@@ -104,8 +104,9 @@ class Order(Base):
     StoreId = Column(ForeignKey('store.StoreId'), nullable=False, index=True)
     CustomerId = Column(ForeignKey('customer.CustomerId'), nullable=False, index=True)
 
-    customer = relationship('Customer')
-    store = relationship('Store')
+    Customer = relationship('Customer')
+    Store = relationship('Store')
+    Orderssparepart = relationship('Orderssparepart')
 
 
 class Sparepart(Base):
@@ -151,5 +152,5 @@ class Orderssparepart(Base):
     SparepartId = Column(ForeignKey('sparepart.SparepartId'), primary_key=True, nullable=False, index=True)
     OrdersAmount = Column(Integer, nullable=False)
 
-    order = relationship('Order')
-    sparepart = relationship('Sparepart')
+    Order = relationship('Order')
+    Sparepart = relationship('Sparepart')
