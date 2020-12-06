@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 engine = sqlalchemy.create_engine(
-    "mysql+mysqlconnector://root:mysql@localhost:3306/databasv2"
+    "mysql+mysqlconnector://root:mysql@localhost:33010/databasv2"
 )
 
 Base = declarative_base()
