@@ -22,8 +22,6 @@ def fix_customers():
         mongo_customer = mm.Customer(as_dict)
         mongo_customer.save()
 
-        print()
-
 
 def fix_personal_data():
     personal_data = session.query(Personaldata).all()
@@ -41,18 +39,17 @@ def fix_orders():
     orders = session.query(Order).all()
     for order in orders:
         as_dict = order.__dict__
-        as_dict['Customer'] = order.customer.__dict__
+
         as_dict['OrderDate'] = str(order.OrderDate)
         as_dict['OrderTime'] = str(order.OrderTime)
+        as_dict['Customer'] = order.Customer.__dict__
+        as_dict['Orderssparepart'] = [orderssparepart.__dict__ for orderssparepart in order.Orderssparepart]
 
         del as_dict['_sa_instance_state']
-        del as_dict ['Customer']['_sa_instance_state']
-        del as_dict['customer']
+        del as_dict['Customer']['_sa_instance_state']
 
         mongo_order = mm.Order(as_dict)
         mongo_order.save()
-
-        print()
 
 
 def fix_inventory():
@@ -62,8 +59,6 @@ def fix_inventory():
         del as_dict['_sa_instance_state']
         mongo_inventory = mm.Inventory(as_dict)
         mongo_inventory.save()
-
-        print()
 
 
 def fix_stores():
@@ -79,8 +74,6 @@ def fix_stores():
         mongo_store = mm.Store(as_dict)
         mongo_store.save()
 
-        print()
-
 
 def main():
     fix_customers()
@@ -88,6 +81,7 @@ def main():
     fix_orders()
     fix_inventory()
     fix_stores()
+
 
 if __name__ == '__main__':
     main()

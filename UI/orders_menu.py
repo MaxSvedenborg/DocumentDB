@@ -1,6 +1,6 @@
 from BL.orders_controller import get_all_orders, get_order_by_id, get_order_by_date, store_new_date, store_new_time, \
     store_new_storeId, store_new_customerId, delete_order, store_new_order
-from Data.Models.orders import Order
+from Mongo.Mongo_models import Order
 
 
 def orders_menu():
@@ -13,7 +13,7 @@ def orders_menu():
         print("3. Find and Update Orders")
         print("4. Create new Order into the system")
         print("5. Delete Order from the system")
-        print("7. Exit Order Menu")
+        print("6. Exit Order Menu")
 
         selection = input("Please select options:  ")
 
@@ -72,7 +72,7 @@ def orders_menu():
 
             edit_choice = input("Opps! StoreId and CustomerId information needed, do you have them? [y/n]: ")
             if (edit_choice.lower() == "y"):
-                order = Order()
+                order = Order({})
                 order.OrderDate = input("Enter Order Date: ")
                 order.OrderTime = input("Enter Order Time: ")
                 order.StoreId = input("Enter Store Id: ")
