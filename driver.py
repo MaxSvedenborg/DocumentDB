@@ -2,6 +2,7 @@ from Mysql_db.DB import session
 from Mysql_db.Models import Customertype, Personaldata, Store, Customer, Manufactor, Storeemployee, Supplier, Car, Order, Sparepart, Inventory, Orderssparepart
 import Mongo.Mongo_models as mm
 
+
 def fix_customers():
     customers = session.query(Customer).all()
     for customer in customers:
@@ -21,8 +22,8 @@ def fix_customers():
         mongo_customer = mm.Customer(as_dict)
         mongo_customer.save()
 
-
         print()
+
 
 def fix_personal_data():
     personal_data = session.query(Personaldata).all()
@@ -34,6 +35,7 @@ def fix_personal_data():
         mongo_personaldata = mm.Personaldata(as_dict)
         mongo_personaldata.save()
         print()
+
 
 def fix_orders():
     orders = session.query(Order).all()
@@ -52,10 +54,40 @@ def fix_orders():
 
         print()
 
+
+def fix_inventory():
+    inventories = session.query(Inventory).all()
+    for inventory in inventories:
+        as_dict = inventory.__dict__
+        del as_dict['_sa_instance_state']
+        mongo_inventory = mm.Inventory(as_dict)
+        mongo_inventory.save()
+
+        print()
+
+
+def fix_stores():
+    stores = session.query(Store).all()
+    for store in stores:
+        as_dict = store.__dict__
+
+        as_dict['storeemployee'] = [storeemployee.__dict__ for storeemployee in store.storeemployee]
+        del as_dict['_sa_instance_state']
+        for storeemployee_dict in as_dict['storeemployee']:
+            del storeemployee_dict['_sa_instance_state']
+
+        mongo_store = mm.Store(as_dict)
+        mongo_store.save()
+
+        print()
+
+
 def main():
     fix_customers()
     fix_personal_data()
     fix_orders()
+    fix_inventory()
+    fix_stores()
 
 if __name__ == '__main__':
     main()
