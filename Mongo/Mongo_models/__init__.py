@@ -57,3 +57,11 @@ class Order(Document):
 
     def __str__(self):
         return f'{self.OrderDate} {self.OrderTime} ({self.Customer.CustomerName})'
+
+
+class Inventory(Document):
+    collection = db.inventory
+
+
+class Store(Document):
+    collection = db.stores

@@ -46,18 +46,42 @@ def fix_orders():
         as_dict['Orderssparepart'] = [orderssparepart.__dict__ for orderssparepart in order.Orderssparepart]
 
         del as_dict['_sa_instance_state']
-        del as_dict ['Customer']['_sa_instance_state']
+        del as_dict['Customer']['_sa_instance_state']
 
         mongo_order = mm.Order(as_dict)
         mongo_order.save()
 
-        print()
+
+def fix_inventory():
+    inventories = session.query(Inventory).all()
+    for inventory in inventories:
+        as_dict = inventory.__dict__
+        del as_dict['_sa_instance_state']
+        mongo_inventory = mm.Inventory(as_dict)
+        mongo_inventory.save()
+
+
+def fix_stores():
+    stores = session.query(Store).all()
+    for store in stores:
+        as_dict = store.__dict__
+
+        as_dict['storeemployee'] = [storeemployee.__dict__ for storeemployee in store.storeemployee]
+        del as_dict['_sa_instance_state']
+        for storeemployee_dict in as_dict['storeemployee']:
+            del storeemployee_dict['_sa_instance_state']
+
+        mongo_store = mm.Store(as_dict)
+        mongo_store.save()
 
 
 def main():
     fix_customers()
     fix_personal_data()
     fix_orders()
+    fix_inventory()
+    fix_stores()
+
 
 if __name__ == '__main__':
     main()

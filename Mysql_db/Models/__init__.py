@@ -31,6 +31,9 @@ class Store(Base):
     StorePhone = Column(String(100), nullable=False)
     StoreEmail = Column(String(100), nullable=False)
 
+    storeemployee = relationship('Storeemployee')
+
+
 
 class Customer(Base):
     __tablename__ = 'customer'
@@ -65,7 +68,7 @@ class Storeemployee(Base):
     PersonalDataId = Column(ForeignKey('personaldata.PersonalDataId'), nullable=False, index=True)
 
     personaldata = relationship('Personaldata')
-    store = relationship('Store')
+    # store = relationship('Store')
 
 
 class Supplier(Base):
