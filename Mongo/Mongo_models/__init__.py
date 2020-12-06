@@ -65,3 +65,12 @@ class Inventory(Document):
 
 class Store(Document):
     collection = db.stores
+
+class Manufactor(Document):
+    collection = db.manufactors
+
+class Supplier(Document):
+    collection = db.suppliers
+
+class Sparepart(Document):
+    collection = db.spareparts
