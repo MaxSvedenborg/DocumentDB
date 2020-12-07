@@ -5,6 +5,9 @@ class Personaldata(Document):
     collection = db.personaldata
 
 
+    def __str__(self):
+       return f'{self.PersonalDataName}'
+
 class Customer(Document):
     collection = db.customers
 
