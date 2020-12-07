@@ -68,3 +68,36 @@ class Inventory(Document):
 
 class Store(Document):
     collection = db.stores
+
+class Manufactor(Document):
+    collection = db.manufactors
+
+    def __init__(self, data):
+        super().__init__(data)
+
+        if "PersonalData" in self.__dict__:
+            self.PersonalData = [NestedDocument(personaldata) for personaldata in self.PersonalData]
+
+    def save(self):
+        if "PersonalData" in self.__dict__:
+            self.PersonalData = [personaldata.__dict__ for personaldata in self.PersonalData]
+
+        super().save()
+
+class Supplier(Document):
+    collection = db.suppliers
+
+    def __init__(self, data):
+        super().__init__(data)
+
+        if "PersonalData" in self.__dict__:
+            self.PersonalData = [NestedDocument(personaldata) for personaldata in self.PersonalData]
+
+    def save(self):
+        if "PersonalData" in self.__dict__:
+            self.PersonalData = [personaldata.__dict__ for personaldata in self.PersonalData]
+
+        super().save()
+
+class Sparepart(Document):
+    collection = db.spareparts

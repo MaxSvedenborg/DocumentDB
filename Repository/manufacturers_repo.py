@@ -1,6 +1,6 @@
 from Data.Models.manufacturers import Manufacturer
 from DB import session
-
+from Mongo.Mongo_models import manufacturers
 def get_all_manufacturers():
     return session.query(Manufacturer).all()
 
