@@ -1,6 +1,7 @@
 from BL.stores_controller import get_all_stores, get_store_by_id, get_store_by_name, store_new_store_name, store_new_store_address, store_new_store_phone, \
     store_new_store_email, store_new_store, delete_store
-from Data.Models.stores import Store
+
+from Mongo.Mongo_models import Store
 
 
 def stores_menu():
@@ -70,7 +71,7 @@ def stores_menu():
                 print("No store found")
 
         elif selection == "4":
-            store = Store()
+            store = Store({})
             store.StoreName = input("Enter Store Name: ")
             store.StoreAddress = input("Enter Store Address: ")
             store.StorePhone = input("Enter Store Phone Number: ")

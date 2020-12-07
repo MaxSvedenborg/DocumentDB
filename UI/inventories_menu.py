@@ -2,7 +2,7 @@ from BL.inventories_controller import get_all_inventories, get_inventory_by_id, 
     store_new_inventory_QTY, store_new_inventory_automatic_order, store_new_inventory, delete_inventory, \
     get_inventory_by_location
 
-from Data.Models.inventories import Inventory
+from Mongo.Mongo_models import Inventory
 
 
 def inventories_menu():

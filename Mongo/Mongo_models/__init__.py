@@ -42,3 +42,20 @@ class Inventory(Document):
 
 class Store(Document):
     collection = db.stores
+
+    # def __init__(self, data):
+    #     super().__init__(data)
+    #
+    #     if "StoreEmployees" in self.__dict__:
+    #         self.StoreEmployees = [NestedDocument(storeemployee) for storeemployee in self.StoreEmployees]
+    #
+    # def save(self):
+    #     if "StoreEmployees" in self.__dict__:
+    #         self.StoreEmployees = [storeemployee.__dict__ for storeemployee in self.StoreEmployees]
+    #
+    #     super().save()
+
+    def __str__(self):
+        return f'{self.StoreName}'
+
+

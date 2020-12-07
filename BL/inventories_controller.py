@@ -1,4 +1,4 @@
-import Data.Repository.inventories_repo as ir
+import Repository.inventories_repo as ir
 
 
 def get_all_inventories():
@@ -14,8 +14,8 @@ def get_inventory_by_location(pattern):
     return {i+1: inventory for i, inventory in enumerate(inventories)}
 
 
-def inventory_changes():
-    ir.inventory_changes()
+# def inventory_changes():
+#     ir.inventory_changes()
 
 
 def store_new_inventory_location(inventory, new_value):
