@@ -70,7 +70,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `databasv2`.`personaldata` (
   `PersonalDataId` INT NOT NULL AUTO_INCREMENT,
-  `PersonaDataName` VARCHAR(100) NOT NULL,
+  `PersonalDataName` VARCHAR(100) NOT NULL,
   `PersonalDataPhone` VARCHAR(100) NOT NULL,
   `PersonalDataEmail` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`PersonalDataId`))
