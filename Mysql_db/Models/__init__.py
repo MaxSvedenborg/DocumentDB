@@ -17,7 +17,7 @@ class Personaldata(Base):
     __tablename__ = 'personaldata'
 
     PersonalDataId = Column(Integer, primary_key=True)
-    PersonaDataName = Column(String(100), nullable=False)
+    PersonalDataName = Column(String(100), nullable=False)
     PersonalDataPhone = Column(String(100), nullable=False)
     PersonalDataEmail = Column(String(100), nullable=False)
 
