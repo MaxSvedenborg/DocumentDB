@@ -1,68 +1,45 @@
-from DB import session
-from Data.Models.suppliers import Supplier
+from Mongo.Mongo_models import Supplier
 
 
 def get_all_suppliers():
-    return session.query(Supplier).all()
+    return Supplier.all()
 
 
 def get_supplier_by_id(id):
-    return session.query(Supplier).filter(Supplier.SupplierId == id).first()
+    return Supplier.find(SupplierId=int(id))
 
 
 def get_supplier_by_name(pattern):
-    return session.query(Supplier).filter(Supplier.SupplierName.like(f'%{pattern}%')).all()
+    return Supplier.find(SupplierName={"$regex":pattern, "$options":"i"})
 
 
-def store_changes():
-    session.commit()
+def store_changes(supplier):
+    supplier.save()
 
 
 def store_new_name(supplier, new_value):
-    try:
-        supplier.SupplierName = new_value
-        session.commit()
-    except:
-        session.rollback()
+    supplier.SupplierName = new_value
+    supplier.save()
 
 
 def store_new_address(supplier, new_value):
-    try:
-        supplier.SupplierAddress = new_value
-        session.commit()
-    except:
-        session.rollback()
+    supplier.SupplierAddress = new_value
+    supplier.save()
 
 
 def store_new_phone(supplier, new_value):
-    try:
-        supplier.SupplierPhone = new_value
-        session.commit()
-    except:
-        session.rollback()
+    supplier.SupplierPhone = new_value
+    supplier.save()
 
 
 def store_new_email(supplier, new_value):
-    try:
-        supplier.SupplierEmail = new_value
-        session.commit()
-    except:
-        session.rollback()
+    supplier.SupplierEmail = new_value
+    supplier.save()
 
 
 def store_new_supplier(supplier):
-    try:
-        session.add(supplier)
-        session.commit()
-    except Exception as e:
-        print(e)
-        session.rollback()
+    supplier.save()
 
 
 def delete_supplier(supplier):
-    try:
-        session.delete(supplier)
-        session.commit()
-    except Exception as e:
-        print(e)
-        session.rollback()
+    supplier.delete(_id=supplier._id)
