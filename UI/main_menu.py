@@ -1,6 +1,6 @@
 from UI.customers_menu import customers_menu
 from UI.orders_menu import orders_menu
-
+from UI.manufacturers_menu import manufacturers_menu
 
 def main_menu():
     while True:
@@ -35,8 +35,8 @@ def main_menu():
         #     suppliers_menu()
         # elif selection == "7":
         #     stores_menu()
-        # elif selection == "8":
-        #     manufacturers_menu()
+        elif selection == "8":
+            manufacturers_menu()
         # elif selection == "9":
         #     spareparts_menu()
         # elif selection == "10":

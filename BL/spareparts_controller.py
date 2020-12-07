@@ -1,4 +1,4 @@
-import Data.Repository.spareparts_repo as spr
+import Repository.spareparts_repo as spr
 
 
 def get_all_spareparts():

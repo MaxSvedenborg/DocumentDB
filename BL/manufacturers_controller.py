@@ -1,5 +1,5 @@
-import Data.Repository.manufacturers_repo as mr
-import Data.Repository.personaldata_repo as pr
+import Repository.manufacturers_repo as mr
+import Repository.personaldata_repo as pr
 
 def get_all_manufacturers():
     return mr.get_all_manufacturers()
