@@ -1,9 +1,10 @@
 from BL.manufacturers_controller import get_all_manufacturers, get_manufacturer_by_id, get_manufacturer_by_name, \
     store_new_manufacturer_address, store_new_manufacturer_phone, store_new_manufacturer, delete_manufacturer, store_new_manufacturer_name
 from BL.personaldata_controller import store_new_personaldata
-from Data.Models.manufacturers import Manufacturer
-from Data.Models.personaldata import Personaldata
-
+# from Models.manufacturers import Manufacturer
+# from Models.personaldata import Personaldata
+from Mongo.Mongo_models import Manufactor
+from Mongo.Mongo_models import Personaldata
 
 def manufacturers_menu():
     while True:
@@ -67,7 +68,7 @@ def manufacturers_menu():
                 print("No manufacturer found")
 
         elif selection == "4":
-            manufacturer = Manufacturer()
+            manufacturer = Manufactor()
             manufacturer.ManufacturerName = input("Enter Manufacturer Name: ")
             manufacturer.ManufacturerAddressHQ = input("Enter Manufacturer Address: ")
             manufacturer.ManufacturerPhoneHQ = input("Enter Manufacturer Phone Number: ")
