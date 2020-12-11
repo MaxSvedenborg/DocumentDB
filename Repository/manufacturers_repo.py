@@ -28,7 +28,7 @@ def store_new_manufacturer_address(manufacturer, new_value):
 
 
 def store_new_manufacturer_phone(manufacturer, new_value):
-    manufacturer.ManufacturerPhoneHQ = new_value
+    manufacturer.ManufactoerPhoneHQ = new_value
     manufacturer.save()
 
 

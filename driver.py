@@ -1,5 +1,5 @@
 from Mysql_db.DB import session
-from Mysql_db.Models import Customertype, Personaldata, Store, Customer, Manufactor, Storeemployee, Supplier, Car, Order, Sparepart, Inventory, Orderssparepart
+from Mysql_db.Models import Personaldata, Store, Customer, Manufactor, Supplier, Order, Sparepart, Inventory
 import Mongo.Mongo_models as mm
 
 
@@ -23,16 +23,16 @@ def fix_customers():
         mongo_customer.save()
 
 
-# def fix_personal_data():
-#     personal_data = session.query(Personaldata).all()
-#     for personal in personal_data:
-#         as_dict = personal.__dict__
-#
-#         del as_dict['_sa_instance_state']
-#
-#         mongo_personaldata = mm.Personaldata(as_dict)
-#         mongo_personaldata.save()
-#         print()
+def fix_personal_data():
+    personal_data = session.query(Personaldata).all()
+    for personal in personal_data:
+        as_dict = personal.__dict__
+
+        del as_dict['_sa_instance_state']
+
+        mongo_personaldata = mm.Personaldata(as_dict)
+        mongo_personaldata.save()
+        print()
 
 
 def fix_orders():
@@ -80,8 +80,8 @@ def fix_manufactors():
     for manufactor in manufactors:
         as_dict = manufactor.__dict__
 
-        # as_dict['personaldata'] = manufactor.personaldata.__dict__
-        # del as_dict['personaldata']['_sa_instance_state']
+        as_dict['personaldata'] = manufactor.personaldata.__dict__
+        del as_dict['personaldata']['_sa_instance_state']
         del as_dict['_sa_instance_state']
         mongo_manufactor = mm.Manufactor(as_dict)
         mongo_manufactor.save()
@@ -92,10 +92,9 @@ def fix_supplier():
     for supplier in suppliers:
         as_dict = supplier.__dict__
 
-        # as_dict['personaldata'] = supplier.personaldata.__dict__
-        # del as_dict['_sa_instance_state']
-        # del as_dict['personaldata']['_sa_instance_state']
+        as_dict['personaldata'] = supplier.personaldata.__dict__
         del as_dict['_sa_instance_state']
+        del as_dict['personaldata']['_sa_instance_state']
         mongo_supplier = mm.Supplier(as_dict)
         mongo_supplier.save()
 
@@ -111,7 +110,7 @@ def fix_sparepart():
 
 def main():
     fix_customers()
-    # fix_personal_data()
+    fix_personal_data()
     fix_orders()
     fix_inventory()
     fix_stores()

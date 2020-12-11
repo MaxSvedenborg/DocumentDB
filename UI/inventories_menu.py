@@ -70,7 +70,7 @@ def inventories_menu():
         elif selection == "4":
             edit_choice = input("Opps! SparepartId and StoreId information needed, do you have them? [y/n]: ")
             if (edit_choice.lower() == "y"):
-                inventory = Inventory()
+                inventory = Inventory({})
                 inventory.InventoryLocation = input("Enter InventoryLocation: ")
                 inventory.InventoryQTY = input("Enter Inventory Amount (number only): ")
                 inventory.InventoryCriticalLevel = input("Enter Inventory Critical Level (number only): ")
