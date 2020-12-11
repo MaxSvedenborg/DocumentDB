@@ -11,6 +11,7 @@ from Mongo.Base_documents import Document, db, NestedDocument
 class Customer(Document):
     collection = db.customers
 
+
     def __init__(self, data):
         super().__init__(data)
 
@@ -61,12 +62,28 @@ class Order(Document):
         return f'{self.OrderDate} {self.OrderTime} ({self.Customer.CustomerName})'
 
 
+class Store(Document):
+    collection = db.stores
+
+    # def __init__(self, data):
+    #     super().__init__(data)
+    #
+    #     if "StoreEmployees" in self.__dict__:
+    #         self.StoreEmployees = [NestedDocument(storeemployee) for storeemployee in self.StoreEmployees]
+    #
+    # def save(self):
+    #     if "StoreEmployees" in self.__dict__:
+    #         self.StoreEmployees = [storeemployee.__dict__ for storeemployee in self.StoreEmployees]
+    #
+    #     super().save()
+
+    def __str__(self):
+        return f'{self.StoreName}'
+
+
 class Inventory(Document):
     collection = db.inventory
 
-
-class Store(Document):
-    collection = db.stores
 
 class Manufactor(Document):
     collection = db.manufactors

@@ -1,67 +1,57 @@
-from Data.Models.stores import Store
-from DB import session
+from Mongo.Mongo_models import Store
 
 
 def get_all_stores():
-    return session.query(Store).all()
+    return Store.all()
 
 
 def get_store_by_id(id):
-    return session.query(Store).filter(Store.StoreId == id).first()
+    return Store.find(StoreId=int(id))
+
+
+# def get_storeemployee_by_id(id):
+#     return Store.find(StoreEmployeeId=int(id))
 
 
 def get_store_by_name(pattern):
-    return session.query(Store).filter(Store.StoreName.like(f'%{pattern}%')).all()
+    # return session.query(Store).filter(Store.StoreName.like(f'%{pattern}%')).all()
+    return Store.find(StoreName={"$regex": pattern, "$options": "i"})
 
-
-def store_changes():
-   session.commit()
+# def store_changes():
+#    session.commit()
 
 
 def store_new_store_name(store, new_value):
-    try:
-        store.StoreName = new_value
-        session.commit()
-    except:
-        session.rollback()
+    store.StoreName = new_value
+    store.save()
 
 
 def store_new_store_address(store, new_value):
-    try:
-        store.StoreAddress = new_value
-        session.commit()
-    except:
-        session.rollback()
+    store.StoreAddress = new_value
+    store.save()
 
 
 def store_new_store_phone(store, new_value):
-    try:
-        store.StorePhone = new_value
-        session.commit()
-    except:
-        session.rollback()
+    store.StorePhone = new_value
+    store.save()
 
 
 def store_new_store_email(store, new_value):
-    try:
-        store.StoreEmail = new_value
-        session.commit()
-    except:
-        session.rollback()
+    store.StoreEmail = new_value
+    store.save()
 
 
 def store_new_store(store):
-    try:
-        session.add(store)
-        session.commit()
-    except:
-        session.rollback()
+    store.save()
 
 
 def delete_store(store):
-    try:
-        session.delete(store)
-        session.commit()
-    except Exception as e:
-        print(e)
-        session.rollback()
+    Store.delete(_id=store._id)
+
+
+# def store_new_storeemployeeId(store, new_value):
+#     store.StoreEmployeeId = new_value
+#     store.save()
+
+
+

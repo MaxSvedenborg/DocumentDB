@@ -46,3 +46,5 @@ def delete_customer(customer):
     Customer.delete(_id=customer._id)
 
 
+def get_storeemployee_by_id(storeemployeeId):
+    return None

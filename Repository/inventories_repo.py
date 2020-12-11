@@ -1,61 +1,48 @@
-from Data.Models.inventories import Inventory
-from DB import session
+from Mongo.Mongo_models import Inventory
 
 
 def get_all_inventories():
-    return session.query(Inventory).all()
+    return Inventory.all()
 
 
 def get_inventory_by_id(id):
-    return session.query(Inventory).filter(Inventory.InventoryId == id).first()
+    return Inventory.find(InventoryId=int(id))
 
 
 def get_inventory_by_location(pattern):
-    return session.query(Inventory).filter(Inventory.InventoryLocation.like(f'%{pattern}%')).all()
+    return Inventory.find(InventoryLocation={"$regex": pattern, "$options": "i"})
 
 
-def inventory_changes():
-    session.commit()
+# def inventory_changes():
+#     session.commit()
 
 
-def store_new_inventory_location(Inventory, new_value):
-    try:
-        Inventory.InventoryLocation = new_value
-        session.commit()
-    except:
-        session.rollback()
+def store_new_inventory_location(inventory, new_value):
+    inventory.InventoryLocation = new_value
+    inventory.save()
 
 
-def store_new_inventory_QTY(Inventory, new_value):
-    try:
-        Inventory.InventoryQTY = new_value
-        session.commit()
-    except:
-        session.rollback()
+
+def store_new_inventory_QTY(inventory, new_value):
+    inventory.InventoryQTY = new_value
+    inventory.save()
 
 
-def store_new_inventory_automatic_order(Inventory, new_value):
-    try:
-        Inventory.InventoryQTYAutomaticOrder = new_value
-        session.commit()
-    except:
-        session.rollback()
+def store_new_inventory_automatic_order(inventory, new_value):
+    # try:
+    #     Inventory.InventoryQTYAutomaticOrder = new_value
+    #     session.commit()
+    # except:
+    #     session.rollback()
+    inventory.InventoryQTYAutomaticOrder = new_value
+    inventory.save()
 
 
-def store_new_inventory(Inventory):
-    try:
-        session.add(Inventory)
-        session.commit()
-    except Exception as e:
-        print(e)
-        session.rollback()
+
+def store_new_inventory(inventory):
+    inventory.save()
 
 
-def delete_inventory(Inventory):
-    try:
-        session.delete(Inventory)
-        session.commit()
-    except Exception as e:
-        print(e)
-        session.rollback()
+def delete_inventory(inventory):
+    Inventory.delete(_id=inventory._id)
 
