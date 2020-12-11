@@ -1,6 +1,6 @@
 from BL.spareparts_controller import get_all_spareparts, get_sparepart_by_id, get_sparepart_by_name, \
     store_new_sparepart_name, store_new_sparepart_description, store_new_sparepart, delete_sparepart
-from Data.Models.spareparts import Sparepart
+from Mongo.Mongo_models import Sparepart
 
 
 def spareparts_menu():
@@ -8,7 +8,7 @@ def spareparts_menu():
         print("===========================")
         print("Spareparts Menu")
         print("===========================")
-        print("1. View All Spareparts")
+        print("1. View All Spareparts info")
         print("2. View Spareparts by Id")
         print("3. Find and Update Spareparts")
         print("4. Create new Sparepart into the system")
@@ -66,7 +66,7 @@ def spareparts_menu():
                 sparepart = Sparepart({})
                 sparepart.SparepartName = input("Enter Sparepart Name: ")
                 sparepart.SparepartDescription = input("Enter Sparepart description: ")
-                sparepart.ManufacturerId = input("Enter Manufacturer Id: ")
+                sparepart.ManufactorId = input("Enter Manufacturer Id: ")
                 sparepart.SupplierId = input("Enter Supplier Id: ")
                 store_new_sparepart(sparepart)
                 print("Sucessfully created new sparepart")

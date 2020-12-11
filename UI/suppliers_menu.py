@@ -1,8 +1,8 @@
-from BL.personaldata_controller import store_new_personaldata
+# from BL.personaldata_controller import store_new_personaldata
 from BL.suppliers_controller import get_all_suppliers, get_supplier_by_id, get_supplier_by_name, store_new_name, \
     store_new_phone, store_new_address, store_new_email, store_new_supplier, delete_supplier
-from Data.Models.personaldata import Personaldata
-from Data.Models.suppliers import Supplier
+# from Data.Models.personaldata import Personaldata
+from Mongo.Mongo_models import Supplier
 
 
 def suppliers_menu():
@@ -72,19 +72,19 @@ def suppliers_menu():
 
         elif selection == "4":
 
-            supplier = Supplier()
+            supplier = Supplier({})
             supplier.SupplierName = input("Enter Supplier Name: ")
             supplier.SupplierAddress = input("Enter Supplier Address: ")
             supplier.SupplierPhone = input("Enter Supplier Phone: ")
             supplier.SupplierEmail = input("Enter Supplier Email: ")
 
-            contact_person = Personaldata()
-            contact_person.PersonalDataName = input("Supplier contact person name: ")
-            contact_person.PersonalDataPhone = input("Supplier contact person phone: ")
-            contact_person.PersonalDataEmail = input("Supplier contact person email: ")
-
-            store_new_personaldata(contact_person)
-            supplier.PersonalData = contact_person
+            # contact_person = Personaldata()
+            # contact_person.PersonalDataName = input("Supplier contact person name: ")
+            # contact_person.PersonalDataPhone = input("Supplier contact person phone: ")
+            # contact_person.PersonalDataEmail = input("Supplier contact person email: ")
+            #
+            # store_new_personaldata(contact_person)
+            # supplier.PersonalData = contact_person
             store_new_supplier(supplier)
             print("Sucessfully created new supplier")
 
