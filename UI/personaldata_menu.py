@@ -1,8 +1,6 @@
 from BL.personaldata_controller import get_all_personaldata, get_personaldata_by_id, get_personaldata_by_name, \
     store_new_name, store_new_phone, store_new_email, store_new_personaldata, delete_personaldata
-
-from Data.Models.personaldata import Personaldata
-
+from Mongo.Mongo_models import Personaldata
 
 def personaldata_menu():
     while True:
@@ -35,7 +33,7 @@ def personaldata_menu():
             personaldata = get_personaldata_by_name(pattern)
             if len(personaldata) > 0:
                 for key, p in personaldata.items():
-                    print(f'{key}. {personaldata}')
+                    print(f'{key}. {p}')
 
                 edit_selection = input("Enter number for personaldata to edit: ")
                 edit_selection = int(edit_selection)
@@ -48,22 +46,22 @@ def personaldata_menu():
                 line = input("Enter number for what line to edit: ")
                 if line == "1":
                     new_value = input("Enter new Personaldata Name: ")
-                    store_new_name(personaldata, new_value)
+                    store_new_name(pd, new_value)
                     print("Sucessfully updated personaldata name")
                 elif line == "2":
                     new_value = input("Enter new Phone: ")
-                    store_new_phone(personaldata, new_value)
+                    store_new_phone(pd, new_value)
                     print("Sucessfully updated personaldata Phone")
                 elif line == "3":
                     new_value = input("Enter new Email: ")
-                    store_new_email(personaldata, new_value)
+                    store_new_email(pd, new_value)
                     print("Sucessfully updated personaldata email")
             else:
                 print("No personaldata found")
 
         elif selection == "4":
 
-            personaldata = Personaldata()
+            personaldata = Personaldata({})
             personaldata.PersonalDataName = input("Enter Personaldata Name: ")
             personaldata.PersonalDataPhone = input("Enter Personaldata Phone: ")
             personaldata.PersonalDataEmail = input("Enter Personaldata Email: ")
@@ -76,7 +74,7 @@ def personaldata_menu():
             personaldata = get_personaldata_by_name(pattern)
             if len(personaldata) > 0:
                 for key, p in personaldata.items():
-                    print(f'{key}. {personaldata}')
+                    print(f'{key}. {p}')
 
                 delete_selection = input("Enter number for customer to delete: ")
                 delete_selection = int(delete_selection)

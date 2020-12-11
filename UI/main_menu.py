@@ -1,7 +1,11 @@
 from UI.customers_menu import customers_menu
+from UI.orders_menu import orders_menu
+from UI.manufacturers_menu import manufacturers_menu
+# from UI.personaldata_menu import personaldata_menu
+from UI.spareparts_menu import spareparts_menu
+from UI.suppliers_menu import suppliers_menu
 from UI.stores_menu import stores_menu
 from UI.inventories_menu import inventories_menu
-
 
 
 def main_menu():
@@ -33,15 +37,15 @@ def main_menu():
         #     orders_menu()
         # elif selection == "5":
         #     personaldata_menu()
-        # elif selection == "6":
-        #     suppliers_menu()
-        elif selection == "7":
-            stores_menu()
-        # elif selection == "8":
-        #     manufacturers_menu()
-        # elif selection == "9":
-        #     spareparts_menu()
-        elif selection == "10":
-            inventories_menu()
+        elif selection == "6":
+            suppliers_menu()
+         elif selection == "7":
+             stores_menu()
+        elif selection == "8":
+            manufacturers_menu()
+        elif selection == "9":
+            spareparts_menu()
+         elif selection == "10":
+             inventories_menu()
         else:
             break

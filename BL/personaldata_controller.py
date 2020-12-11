@@ -1,4 +1,4 @@
-import Data.Repository.personaldata_repo as pr
+import Repository.personaldata_repo as pr
 
 
 def get_all_personaldata():
@@ -12,10 +12,6 @@ def get_personaldata_by_id(id):
 def get_personaldata_by_name(pattern):
     personaldata = pr.get_personaldata_by_name(pattern)
     return {i+1: customer for i, customer in enumerate(personaldata)}
-
-
-def store_changes():
-    pr.store_changes()
 
 
 def store_new_name(personaldata, new_value):

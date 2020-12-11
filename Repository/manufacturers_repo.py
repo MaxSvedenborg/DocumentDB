@@ -1,54 +1,40 @@
-from Data.Models.manufacturers import Manufacturer
-from DB import session
+from Mongo.Mongo_models import Manufactor
+
 
 def get_all_manufacturers():
-    return session.query(Manufacturer).all()
+    return Manufactor.all()
+
 
 def get_manufacturer_by_id(id):
-    return session.query(Manufacturer).filter(Manufacturer.ManufacturerId == id).first()
+    return Manufactor.find(ManufactorerId=int(id))
+
 
 def get_manufacturer_by_name(pattern):
-    return session.query(Manufacturer).filter(Manufacturer.ManufacturerName.like(f'%{pattern}%')).all()
+    return Manufactor.find(ManufactorerName={"$regex":pattern, "$options":"i"})
 
-def store_changes():
-   session.commit()
+
+def store_changes(manufactor):
+    manufactor.save()
+
 
 def store_new_manufacturer_name(manufacturer, new_value):
-    try:
-        manufacturer.ManufacturerName = new_value
-        session.commit()
-    except:
-        session.rollback()
+    manufacturer.ManufactorerName = new_value
+    manufacturer.save()
+
 
 def store_new_manufacturer_address(manufacturer, new_value):
-    try:
-        manufacturer.ManufacturerAddressHQ = new_value
-        session.commit()
-    except:
-        session.rollback()
+    manufacturer.ManufacturerAddressHQ = new_value
+    manufacturer.save()
 
 
 def store_new_manufacturer_phone(manufacturer, new_value):
-    try:
-        manufacturer.ManufacturerPhoneHQ = new_value
-        session.commit()
-    except:
-        session.rollback()
+    manufacturer.ManufacturerPhoneHQ = new_value
+    manufacturer.save()
 
 
 def store_new_manufacturer(manufacturer):
-    try:
-        session.add(manufacturer)
-        session.commit()
-    except:
-        session.rollback()
+    manufacturer.save()
 
 
 def delete_manufacturer(manufacturer):
-    try:
-        session.delete(manufacturer)
-        session.commit()
-    except Exception as e:
-        print(e)
-        session.rollback()
-
+    manufacturer.delete(_id=manufacturer._id)

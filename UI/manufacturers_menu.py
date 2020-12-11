@@ -1,16 +1,17 @@
 from BL.manufacturers_controller import get_all_manufacturers, get_manufacturer_by_id, get_manufacturer_by_name, \
     store_new_manufacturer_address, store_new_manufacturer_phone, store_new_manufacturer, delete_manufacturer, store_new_manufacturer_name
 from BL.personaldata_controller import store_new_personaldata
-from Data.Models.manufacturers import Manufacturer
-from Data.Models.personaldata import Personaldata
-
+# from Models.manufacturers import Manufacturer
+# from Models.personaldata import Personaldata
+from Mongo.Mongo_models import Manufactor
+# from Mongo.Mongo_models import Personaldata
 
 def manufacturers_menu():
     while True:
         print("===========================")
         print("Manufacturer Menu")
         print("===========================")
-        print("1. View All Manufacturer")
+        print("1. View All Manufacturer info")
         print("2. View Manufacturer by Id")
         print("3. Find and Update Manufacturers")
         print("4. Create new Manufacturer into the system")
@@ -45,9 +46,9 @@ def manufacturers_menu():
                     edit_selection = int(edit_selection)
 
                     manufacturer = manufacturers[edit_selection]
-                    print(f'1. Manufacturer Name: {manufacturer.ManufacturerName}')
-                    print(f'2. Manufacturer Address: {manufacturer.ManufacturerAddressHQ}')
-                    print(f'3. Manufacturer Phone: {manufacturer.ManufacturerPhoneHQ}')
+                    print(f'1. Manufacturer Name: {manufacturer.ManufactorerName}')
+                    print(f'2. Manufacturer Address: {manufacturer.ManufactorerAddressHQ}')
+                    print(f'3. Manufacturer Phone: {manufacturer.ManufactoerPhoneHQ}')
 
                     line = input("Enter number for what line to edit: ")
                     if line == "1":
@@ -67,18 +68,18 @@ def manufacturers_menu():
                 print("No manufacturer found")
 
         elif selection == "4":
-            manufacturer = Manufacturer()
-            manufacturer.ManufacturerName = input("Enter Manufacturer Name: ")
-            manufacturer.ManufacturerAddressHQ = input("Enter Manufacturer Address: ")
-            manufacturer.ManufacturerPhoneHQ = input("Enter Manufacturer Phone Number: ")
+            manufacturer = Manufactor({})
+            manufacturer.ManufactorerName = input("Enter Manufacturer Name: ")
+            manufacturer.ManufactorerAddressHQ = input("Enter Manufacturer Address: ")
+            manufacturer.ManufactoerPhoneHQ = input("Enter Manufacturer Phone Number: ")
 
-            contact_person = Personaldata()
-            contact_person.PersonalDataName = input("Manufacturer contact person name: ")
-            contact_person.PersonalDataPhone = input("Manufacturer contact person phone: ")
-            contact_person.PersonalDataEmail = input("Manufacturer contact person email: ")
-
-            store_new_personaldata(contact_person)
-            manufacturer.PersonalData = contact_person
+            # contact_person = Personaldata()
+            # contact_person.PersonalDataName = input("Manufacturer contact person name: ")
+            # contact_person.PersonalDataPhone = input("Manufacturer contact person phone: ")
+            # contact_person.PersonalDataEmail = input("Manufacturer contact person email: ")
+            #
+            # store_new_personaldata(contact_person)
+            # manufacturer.PersonalData = contact_person
 
             store_new_manufacturer(manufacturer)
             print("Sucessfully created new Manufacturer")

@@ -1,4 +1,4 @@
-import Data.Repository.suppliers_repo as sr
+import Repository.suppliers_repo as sr
 
 
 def get_all_suppliers():

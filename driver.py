@@ -22,37 +22,34 @@ def fix_customers():
         mongo_customer = mm.Customer(as_dict)
         mongo_customer.save()
 
-        print()
 
-
-def fix_personal_data():
-    personal_data = session.query(Personaldata).all()
-    for personal in personal_data:
-        as_dict = personal.__dict__
-
-        del as_dict['_sa_instance_state']
-
-        mongo_personaldata = mm.Personaldata(as_dict)
-        mongo_personaldata.save()
-        print()
+# def fix_personal_data():
+#     personal_data = session.query(Personaldata).all()
+#     for personal in personal_data:
+#         as_dict = personal.__dict__
+#
+#         del as_dict['_sa_instance_state']
+#
+#         mongo_personaldata = mm.Personaldata(as_dict)
+#         mongo_personaldata.save()
+#         print()
 
 
 def fix_orders():
     orders = session.query(Order).all()
     for order in orders:
         as_dict = order.__dict__
-        as_dict['Customer'] = order.customer.__dict__
+
         as_dict['OrderDate'] = str(order.OrderDate)
         as_dict['OrderTime'] = str(order.OrderTime)
+        as_dict['Customer'] = order.Customer.__dict__
+        as_dict['Orderssparepart'] = [orderssparepart.__dict__ for orderssparepart in order.Orderssparepart]
 
         del as_dict['_sa_instance_state']
-        del as_dict ['Customer']['_sa_instance_state']
-        del as_dict['customer']
+        del as_dict['Customer']['_sa_instance_state']
 
         mongo_order = mm.Order(as_dict)
         mongo_order.save()
-
-        print()
 
 
 def fix_inventory():
@@ -62,8 +59,6 @@ def fix_inventory():
         del as_dict['_sa_instance_state']
         mongo_inventory = mm.Inventory(as_dict)
         mongo_inventory.save()
-
-        print()
 
 
 def fix_stores():
@@ -79,15 +74,50 @@ def fix_stores():
         mongo_store = mm.Store(as_dict)
         mongo_store.save()
 
-        print()
 
+def fix_manufactors():
+    manufactors = session.query(Manufactor).all()
+    for manufactor in manufactors:
+        as_dict = manufactor.__dict__
+
+        # as_dict['personaldata'] = manufactor.personaldata.__dict__
+        # del as_dict['personaldata']['_sa_instance_state']
+        del as_dict['_sa_instance_state']
+        mongo_manufactor = mm.Manufactor(as_dict)
+        mongo_manufactor.save()
+
+
+def fix_supplier():
+    suppliers = session.query(Supplier).all()
+    for supplier in suppliers:
+        as_dict = supplier.__dict__
+
+        # as_dict['personaldata'] = supplier.personaldata.__dict__
+        # del as_dict['_sa_instance_state']
+        # del as_dict['personaldata']['_sa_instance_state']
+        del as_dict['_sa_instance_state']
+        mongo_supplier = mm.Supplier(as_dict)
+        mongo_supplier.save()
+
+
+def fix_sparepart():
+    spareparts = session.query(Sparepart).all()
+    for sparepart in spareparts:
+        as_dict = sparepart.__dict__
+        del as_dict['_sa_instance_state']
+
+        mongo_sparepart = mm.Sparepart(as_dict)
+        mongo_sparepart.save()
 
 def main():
     fix_customers()
-    fix_personal_data()
+    # fix_personal_data()
     fix_orders()
     fix_inventory()
     fix_stores()
+    fix_manufactors()
+    fix_supplier()
+    fix_sparepart()
 
 if __name__ == '__main__':
     main()
